@@ -175,9 +175,10 @@ MonoBehaviour:
   scoreHappiness: 0
   scoreHome: 0
   item_num: 0
+  gravityGauge: {fileID: 0}
   startDegreeMin: 50
   startDegreeMax: 60
-  gPoint: 0
+  endDegree: -50
   startGPoint: 10000
   correctionDistance: 1.5
   GPointRate: 50

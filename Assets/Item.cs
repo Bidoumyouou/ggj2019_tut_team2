@@ -222,6 +222,8 @@ public class Item : MonoBehaviour
             //fallflag on
             falledFlag = true;
             gameMgr.item_num -= 1;
+
+            gameMgr.CountScore(this.gameObject);
         }
     }
 

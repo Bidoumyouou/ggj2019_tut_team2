@@ -49,4 +49,14 @@ public class GameMgr : MonoBehaviour
     {
         
     }
+
+    public void CountScore(GameObject _itemobj)
+    {
+        Item item = _itemobj.GetComponent<Item>();
+
+        scoreLife += item.pointLife;
+        scoreHappiness += item.pointHappiness;
+        scoreHome += item.pointHome;
+        //
+    }
 }
