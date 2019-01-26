@@ -8,9 +8,9 @@ public class Item : MonoBehaviour
 {
     [Tooltip("アイテム固有のGポイント倍率")]public float itemGP = 2;//アイテム固有のGpoint倍率
 
-    int pointLife;
-    int pointHappiness;
-    int pointHome;
+    public int pointLife;
+    public int pointHappiness;
+    public int pointHome;
 
     public float firstspeed = 2f;
     public float force_amount = 2000;
@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
 
     Rigidbody2D rb;
 
-    public bool isClicked= false;
+    public bool isTouched = false;
 
     public int consumeGPoint;//このアイテムが現在消費させるGポイント算出値
     bool falledFlag = false;//すでに落下処理が完了しているかどうか
@@ -73,29 +73,41 @@ public class Item : MonoBehaviour
 
     void FallSequence()
     {
+        //マウスのオーバーレイを検出する
+        isTouched = MouseSequence();
+
+  
         //マウスが押されていたら
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 aTapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            Collider2D aCollider2d = Physics2D.OverlapPoint(aTapPoint);
-
-            if (aCollider2d)
+            //Gポイントが消費量より上かつfallflagがfalse
+            if (isTouched && !falledFlag)
             {
-                GameObject obj = aCollider2d.transform.gameObject;
-                //マウスポインタがこのオブジェクトに触れていたら
-                if (obj == this.gameObject)
-                {
-                    //Gポイントが消費量より上かつfallflagがfalse
-                    if (CheckGPoint() && !falledFlag)
-                    {
-                        //落下を成立させる
-                        Fall();
-                    }
-                }
+                //落下を成立させる
+                Fall();
             }
+
+           
         }
 
+    }
+
+    bool MouseSequence()
+    {
+        Vector3 aTapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Collider2D aCollider2d = Physics2D.OverlapPoint(aTapPoint);
+
+        if (aCollider2d)
+        {
+            GameObject obj = aCollider2d.transform.gameObject;
+            //マウスポインタがこのオブジェクトに触れていたら
+            if (obj == this.gameObject)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     //Gポイントが要件を満たしているかを判定する
     bool CheckGPoint()
