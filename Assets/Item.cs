@@ -187,8 +187,8 @@ public class Item : MonoBehaviour
         Debug.Log("I consumed " + consumeGPoint + " point and remain G is " + gameMgr.gPoint);
 
 
-        Vector3 diff = (this.star.transform.position - this.transform.position).normalized;
-        this.transform.rotation = Quaternion.FromToRotation(Vector3.up, diff);
+        //Vector3 diff = (this.star.transform.position - this.transform.position).normalized;
+        //this.transform.rotation = Quaternion.FromToRotation(Vector3.up, diff);
 
         
 
