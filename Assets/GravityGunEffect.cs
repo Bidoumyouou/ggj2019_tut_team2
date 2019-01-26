@@ -11,6 +11,7 @@ public class GravityGunEffect : MonoBehaviour
 	public float UpdateTime;
 
 	float time_;
+	AudioSource audioSource_;
 	LineRenderer[] thunders_;
 
     // Start is called before the first frame update
@@ -21,10 +22,28 @@ public class GravityGunEffect : MonoBehaviour
 			Instantiate(ThunderPrefab, this.transform);
 		}
 		thunders_ = GetComponentsInChildren<LineRenderer>();
+		audioSource_ = GetComponent<AudioSource>();
 	}
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	void Update()
+	{
+		for( int i = 0; i < thunders_.Length; ++i )
+		{
+			thunders_[i].gameObject.SetActive(Input.GetMouseButton(0));
+		}
+		TargetPoint.SetActive(Input.GetMouseButton(0));
+		TargetPoint.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+		if( Input.GetMouseButtonDown(0) )
+		{
+			audioSource_.Play();
+		}
+
+		Animate();
+	}
+
+	void Animate()
 	{
 		time_ += Time.deltaTime;
 		if( time_ > UpdateTime )

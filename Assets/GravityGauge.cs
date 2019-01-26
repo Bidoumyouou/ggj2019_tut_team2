@@ -44,6 +44,8 @@ public class GravityGauge : MonoBehaviour
 
 	public void SetGravityPoint(float power)
 	{
+		print(power);
+
 		Gravity = power;
 
 		AnimManager.AddAnim(Current, Gravity / MaxGravity, ParamType.GaugeRate, AnimType.Time, 0.1f);

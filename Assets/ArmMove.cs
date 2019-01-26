@@ -16,9 +16,9 @@ public class ArmMove : MonoBehaviour
         var screenPos = Camera.main.WorldToScreenPoint(transform.position);
         var direction = Input.mousePosition - screenPos;
 
-        Debug.Log(direction);
+        //Debug.Log(direction);
         var angle = GetAim(transform.position, direction);
-        Debug.Log(angle);
+        //Debug.Log(angle);
 
         var a = transform.localEulerAngles;
         a.z = angle-90;
