@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemGP: 2
-  initialPos: {x: 0, y: 10, z: 0}
+  initialPos: {x: 0, y: 3, z: 0}
   pointLife: 0
   pointHappiness: 0
   pointHome: 0

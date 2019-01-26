@@ -14,10 +14,11 @@ public class GameMgr : MonoBehaviour
 
     [Tooltip("初期生成角度最小値")] public float startDegreeMin = 50;
     [Tooltip("初期生成角度最大値")] public float startDegreeMax = 60;
+    [Tooltip("初期生成角度最大値")] public float endDegree = -50;
 
 
-	//グラビティポイント
-	[HideInInspector]
+    //グラビティポイント
+    [HideInInspector]
 	public int gPoint
 	{
 		get { return gravityPoint_; }

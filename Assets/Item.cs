@@ -70,7 +70,7 @@ public class Item : MonoBehaviour
 
         FallSequence();
 
-
+        DeleteSequence();
 
 
     }
@@ -122,6 +122,16 @@ public class Item : MonoBehaviour
 
         }
 
+    }
+
+    void DeleteSequence()
+    {
+        if(transform.position.x > 10)
+        {
+            gameMgr.item_num -= 1;
+            GameObject.Destroy(transform.parent.gameObject);
+            GameObject.Destroy(this.gameObject);
+        }
     }
 
     void RotatePivot()
@@ -211,6 +221,7 @@ public class Item : MonoBehaviour
             rb.constraints =  RigidbodyConstraints2D.FreezeAll;
             //fallflag on
             falledFlag = true;
+            gameMgr.item_num -= 1;
         }
     }
 
