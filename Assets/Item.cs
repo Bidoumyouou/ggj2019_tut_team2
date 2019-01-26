@@ -222,6 +222,10 @@ public class Item : MonoBehaviour
             //fallflag on
             falledFlag = true;
             gameMgr.item_num -= 1;
+
+            GameObject SESound = GameObject.Find("GameMgr");
+            AudioSource SE = SESound.GetComponent<AudioSource>();
+            SE.Play();
         }
     }
 
