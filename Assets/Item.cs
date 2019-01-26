@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [Tooltip("アイテム固有のGポイント倍率")]public float itemGP = 2;//アイテム固有のGpoint倍率
+    [Tooltip("アイテム固有のGポイント倍率")] public float itemGP = 2;//アイテム固有のGpoint倍率
+
+
 
     public int pointLife;
     public int pointHappiness;
@@ -14,6 +16,8 @@ public class Item : MonoBehaviour
 
     public float firstspeed = 2f;
     public float force_amount = 2000;
+
+    [Tooltip("回転角/1フレーム")] public float rad = 1;
 
     public GameMgr gameMgr;
 
@@ -26,19 +30,32 @@ public class Item : MonoBehaviour
     public int consumeGPoint;//このアイテムが現在消費させるGポイント算出値
     bool falledFlag = false;//すでに落下処理が完了しているかどうか
 
+    Transform pivotTransform;
+
+    float basePosY;
+    [Tooltip("ゆらゆらの周波数")]public float frequency = 10;
+    [Tooltip("ゆらゆらの振幅")] public float amplitude = 0.1f;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         gameMgr = GameObject.Find("GameMgr").GetComponent<GameMgr>();
         star = GameObject.Find("Planet");
-        //if (gameMgr == null) { gameMgr = GameObject.Find("GameMgr").GetComponent<GameMgr>(); }
-        //if (star_transform == null) { gameMgr = GameObject.Find("Planet").GetComponent<GameMgr>(); }
+
+        //ピボットのトランスフォームを取得する
+        if (transform.parent)
+        {
+            pivotTransform = transform.parent.transform;
+        }
+
+        basePosY = transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         CalcConsumeGPoint();
 
         FallSequence();
@@ -46,11 +63,20 @@ public class Item : MonoBehaviour
 
 
         //マウスカーソルが当たっていたら
-        if (Input.GetKeyDown(KeyCode.Z)){
+        if (Input.GetKeyDown(KeyCode.Z)) {
             Fall();
 
         }
     }
+
+    private void FixedUpdate()
+    {
+        //スイングバイ
+        RotatePivot();
+        //ゆらゆら
+        Waveing();
+    }
+
 
     void CalcConsumeGPoint()
     {
@@ -76,7 +102,7 @@ public class Item : MonoBehaviour
         //マウスのオーバーレイを検出する
         isTouched = MouseSequence();
 
-  
+
         //マウスが押されていたら
         if (Input.GetMouseButtonDown(0))
         {
@@ -87,9 +113,29 @@ public class Item : MonoBehaviour
                 Fall();
             }
 
-           
+
         }
 
+    }
+
+    void RotatePivot()
+    {
+        if (pivotTransform)
+        {
+            pivotTransform.Rotate(new Vector3(0, 0, rad));
+        }
+    }
+
+    void Waveing() {
+
+        //transform.position = new Vector3(transform.position.x, basePosY + Mathf.Sin(t) , transform.position.z);
+        //transform.Translate(0, 2 * Mathf.Acos(t), 0);
+        //pos.x += Mathf.Sin(Time.time * speed) * 4f;
+        float y = transform.localPosition.y;
+
+        y += Mathf.Cos(Time.time * frequency) * amplitude;
+
+        transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
     }
 
     bool MouseSequence()
