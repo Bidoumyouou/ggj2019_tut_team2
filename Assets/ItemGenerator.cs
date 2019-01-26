@@ -11,6 +11,8 @@ public class ItemGenerator : MonoBehaviour
 
     public List<GameObject> itemPrefabList;
 
+	public List<Item> FloatingItemList { get; private set; } = new List<Item>();
+
     float time;
     public float frequency;
 
@@ -37,7 +39,7 @@ public class ItemGenerator : MonoBehaviour
         if(time > frequency)
         {
             time = 0;
-            if (gameMgr.item_num < maxItemNum)
+            if (FloatingItemList.Count < maxItemNum)
             {
                 Generate();
 
@@ -57,7 +59,7 @@ public class ItemGenerator : MonoBehaviour
 
 
         GameObject item = GameObject.Instantiate(itemPrefabList[m]);
-        gameMgr.item_num++;
+		FloatingItemList.Add(item.GetComponent<Item>());
 
 
         item.transform.parent = pivot.transform;

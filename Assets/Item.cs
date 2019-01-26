@@ -128,7 +128,7 @@ public class Item : MonoBehaviour
     {
         if(transform.position.x > 10)
         {
-            gameMgr.item_num -= 1;
+			GetComponentInParent<ItemGenerator>().FloatingItemList.Remove(this);
             GameObject.Destroy(transform.parent.gameObject);
             GameObject.Destroy(this.gameObject);
         }
@@ -210,8 +210,9 @@ public class Item : MonoBehaviour
         rb.velocity = -vec_sub * firstspeed;
         //
         rb.AddForce( -vec_sub * force_amount);
-        
-    }
+
+		GetComponentInParent<ItemGenerator>().FloatingItemList.Remove(this);
+	}
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -221,9 +222,8 @@ public class Item : MonoBehaviour
             rb.constraints =  RigidbodyConstraints2D.FreezeAll;
             //fallflag on
             falledFlag = true;
-            gameMgr.item_num -= 1;
 
-            GameObject SESound = GameObject.Find("GameMgr");
+			GameObject SESound = GameObject.Find("GameMgr");
             AudioSource SE = SESound.GetComponent<AudioSource>();
             SE.Play();
             gameMgr.CountScore(this.gameObject);
