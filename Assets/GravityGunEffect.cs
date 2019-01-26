@@ -29,7 +29,7 @@ public class GravityGunEffect : MonoBehaviour
 		time_ += Time.deltaTime;
 		if( time_ > UpdateTime )
 		{
-			Vector3 direction = TargetPoint.transform.position - this.transform.position;
+			Vector3 direction = TargetPoint.transform.localPosition;
 			float length = direction.magnitude;
 			int numVertex = (int)(VertexPerLength * length);
 			for( int i = 0; i < thunders_.Length; ++i )
