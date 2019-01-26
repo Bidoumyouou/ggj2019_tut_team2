@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6676153223173387190}
   - component: {fileID: 6676153223173387191}
   - component: {fileID: 6676153223173387176}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TestItem
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -120,11 +120,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 576cb72b6c10bf9428471367e80a64f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemGP: 2
+  pointLife: 0
+  pointHappiness: 0
+  pointHome: 0
   firstspeed: 2
   force_amount: 2000
+  rad: 1
   gameMgr: {fileID: 0}
-  star_transform: {fileID: 0}
-  isClicked: 0
+  star: {fileID: 0}
+  isTouched: 0
   consumeGPoint: 100
 --- !u!50 &6676153223173387176
 Rigidbody2D:

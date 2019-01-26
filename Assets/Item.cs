@@ -8,12 +8,16 @@ public class Item : MonoBehaviour
 {
     [Tooltip("アイテム固有のGポイント倍率")]public float itemGP = 2;//アイテム固有のGpoint倍率
 
+
+
     public int pointLife;
     public int pointHappiness;
     public int pointHome;
 
     public float firstspeed = 2f;
     public float force_amount = 2000;
+
+    [Tooltip("回転角/1フレーム")]public float rad = 1;
 
     public GameMgr gameMgr;
 
@@ -26,24 +30,31 @@ public class Item : MonoBehaviour
     public int consumeGPoint;//このアイテムが現在消費させるGポイント算出値
     bool falledFlag = false;//すでに落下処理が完了しているかどうか
 
+    Transform pivotTransform;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         gameMgr = GameObject.Find("GameMgr").GetComponent<GameMgr>();
         star = GameObject.Find("Planet");
-        //if (gameMgr == null) { gameMgr = GameObject.Find("GameMgr").GetComponent<GameMgr>(); }
-        //if (star_transform == null) { gameMgr = GameObject.Find("Planet").GetComponent<GameMgr>(); }
+
+        //ピボットのトランスフォームを取得する
+        if (transform.parent)
+        {
+            pivotTransform = transform.parent.transform;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+
         CalcConsumeGPoint();
 
         FallSequence();
 
-
+        
 
         //マウスカーソルが当たっていたら
         if (Input.GetKeyDown(KeyCode.Z)){
@@ -51,6 +62,12 @@ public class Item : MonoBehaviour
 
         }
     }
+
+    private void FixedUpdate()
+    {
+        RotatePivot();
+    }
+
 
     void CalcConsumeGPoint()
     {
@@ -90,6 +107,15 @@ public class Item : MonoBehaviour
            
         }
 
+    }
+
+
+    void RotatePivot()
+    {
+        if (pivotTransform)
+        {
+            pivotTransform.Rotate(new Vector3(0, 0, rad));
+        }
     }
 
     bool MouseSequence()
