@@ -33,7 +33,9 @@ public class Item : MonoBehaviour
     Transform pivotTransform;
 
     float basePosY;
-    public float frequency;
+    [Tooltip("ゆらゆらの周波数")]public float frequency = 10;
+    [Tooltip("ゆらゆらの振幅")] public float amplitude = 0.1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -123,7 +125,6 @@ public class Item : MonoBehaviour
             pivotTransform.Rotate(new Vector3(0, 0, rad));
         }
     }
-    public float r_speed = 0.1f;
 
     void Waveing() {
 
@@ -132,7 +133,7 @@ public class Item : MonoBehaviour
         //pos.x += Mathf.Sin(Time.time * speed) * 4f;
         float y = transform.localPosition.y;
 
-        y += Mathf.Cos(Time.time * frequency) * r_speed;
+        y += Mathf.Cos(Time.time * frequency) * amplitude;
 
         transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
     }
