@@ -136,11 +136,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211799307}
   m_LocalRotation: {x: -0, y: -0, z: 0.5, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: -12, z: 0}
+  m_LocalPosition: {x: 0, y: -20.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 60}
 --- !u!1 &549705045
 GameObject:
@@ -174,6 +174,7 @@ MonoBehaviour:
   scoreLife: 0
   scoreHappiness: 0
   scoreHome: 0
+  item_num: 0
   startDegreeMin: 50
   startDegreeMax: 60
   gPoint: 0
@@ -192,7 +193,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &940124607
 PrefabInstance:
@@ -397,6 +398,8 @@ MonoBehaviour:
   - {fileID: 6453258539415538420, guid: a97716d83f9333d428fa1c5f774bbd06, type: 3}
   - {fileID: 6453258539415538420, guid: 9793b9f6a601e4d47b4910fb66e95776, type: 3}
   - {fileID: 3511126411821943339, guid: 1c710fc3d8fd8ce4b98156b1a3dfc3c9, type: 3}
+  frequency: 1
+  maxItemNum: 5
 --- !u!58 &1430836757
 CircleCollider2D:
   m_ObjectHideFlags: 0

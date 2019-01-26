@@ -141,11 +141,11 @@ public class Item : MonoBehaviour
             //transform.position = new Vector3(transform.position.x, basePosY + Mathf.Sin(t) , transform.position.z);
             //transform.Translate(0, 2 * Mathf.Acos(t), 0);
             //pos.x += Mathf.Sin(Time.time * speed) * 4f;
-            float y = transform.localPosition.y;
+            float x = transform.localPosition.x;
 
-            y += Mathf.Cos(Time.time * frequency) * amplitude;
+            x += Mathf.Cos(Time.time * frequency) * amplitude;
 
-            transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
+            transform.localPosition = new Vector3(x, transform.localPosition.y, transform.localPosition.z);
         }
     }
 
