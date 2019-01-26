@@ -396,9 +396,9 @@ MonoBehaviour:
   itemCorePivot: {fileID: 1795819927081746624, guid: 569a2ef6ca479a3419614499809ed2ec,
     type: 3}
   itemPrefabList:
-  - {fileID: 6453258539415538420, guid: a97716d83f9333d428fa1c5f774bbd06, type: 3}
-  - {fileID: 6453258539415538420, guid: 9793b9f6a601e4d47b4910fb66e95776, type: 3}
-  - {fileID: 3511126411821943339, guid: 1c710fc3d8fd8ce4b98156b1a3dfc3c9, type: 3}
+  - {fileID: 6453258539415538420, guid: f1a07f048e8433e4d98fde2ef2d4be1c, type: 3}
+  - {fileID: 6453258539415538420, guid: dfbe80e4f1917554d9954ab018c91cd5, type: 3}
+  - {fileID: 6453258539415538420, guid: 3f938ae1306386b40847085239856317, type: 3}
   frequency: 1
   maxItemNum: 5
 --- !u!58 &1430836757
