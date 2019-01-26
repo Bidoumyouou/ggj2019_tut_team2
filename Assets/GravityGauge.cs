@@ -42,7 +42,7 @@ public class GravityGauge : MonoBehaviour
 		}
 	}
 
-	public void SetGravityPower(float power)
+	public void SetGravityPoint(float power)
 	{
 		Gravity = power;
 
@@ -60,7 +60,7 @@ public class GravityGauge : MonoBehaviour
 	{
 		if( UpdateUI )
 		{
-			SetGravityPower(Gravity);
+			SetGravityPoint(Gravity);
 			UpdateUI = false;
 		}
 	}
