@@ -11,6 +11,8 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 	public float RandomRange;
 	public float UpdateTime;
 	public Color DefaultColor;
+	public TextMesh ConsumeGText;
+	public GravityGauge GGauge;
 
 	Color color_;
 	float time_;
@@ -37,6 +39,7 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 
 	public void Fire()
 	{
+		// これ自体は残して、プレイヤーの腕に追随しないエフェクトだけ出して消したいので、別オブジェクトにしてFire＆Destroy!
 		GravityGunEffect remainGunEffect = Instantiate(this, this.transform.position, this.transform.rotation);
 		remainGunEffect.FireAndDestroy();
 	}
@@ -52,6 +55,18 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 	{
 		SetColor(ColorManager.MakeAlpha(DefaultColor, 0.3f));
 		TargetPoint.transform.position = item.transform.position;
+
+		ConsumeGText.gameObject.SetActive(true);
+		ConsumeGText.transform.position = item.transform.position + Vector3.back;
+		ConsumeGText.text = item.consumeGPoint.ToString();
+
+		GGauge.SetPreviewPoint(Mathf.Max(0, (int)GGauge.Gravity - item.consumeGPoint));
+	}
+
+	public void EndPreview()
+	{
+		ConsumeGText.gameObject.SetActive(false);
+		GGauge.SetPreviewPoint((int)GGauge.Gravity);
 	}
 
 	void Animate()

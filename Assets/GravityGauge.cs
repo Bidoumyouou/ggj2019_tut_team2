@@ -17,18 +17,25 @@ public class GravityGauge : MonoBehaviour
 	public UIGaugeRenderer Next;
 	public Text Text;
 
+	Color currentColor_;
+	Color nextColor_;
+
 	// Start is called before the first frame update
 	void Awake()
     {
 		MaxGravity = Gravity;
 		OldGravity = Gravity;
 		TextCurrentGravity = (int)Gravity;
+
+		currentColor_ = Current.color;
+		nextColor_ = Next.color;
 	}
 
     // Update is called once per frame
     void Update()
     {
 		Prev.SetColor(ColorManager.MakeAlpha(Prev.color, (Mathf.Sin(Time.time * BlinkRate) + 1) / 2));
+		Current.SetColor(Color.Lerp(currentColor_, nextColor_, (Mathf.Sin(Time.time * BlinkRate/2) + 1) / 2 - 0.3f));
 
 		if( TextCurrentGravity > (int)Gravity )
 		{
@@ -42,6 +49,11 @@ public class GravityGauge : MonoBehaviour
 		}
 	}
 
+	public void SetPreviewPoint(int previewPoint)
+	{
+		Next.SetRate(previewPoint / MaxGravity);
+	}
+
 	public void SetGravityPoint(float power)
 	{
 		print(power);
@@ -53,17 +65,5 @@ public class GravityGauge : MonoBehaviour
 		AnimManager.AddAnim(Prev, Gravity / MaxGravity, ParamType.GaugeRate, AnimType.Time, 0.1f, 0.5f);
 
 		OldGravity = Gravity;
-	}
-
-
-	// debug
-	public bool UpdateUI = false;
-	void OnValidate()
-	{
-		if( UpdateUI )
-		{
-			SetGravityPoint(Gravity);
-			UpdateUI = false;
-		}
 	}
 }

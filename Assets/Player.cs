@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 	public ItemGenerator ItemGen;
 	public GravityGunEffect GunEffect;
 
+	Item lastPreviewedItem_ = null;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -38,10 +40,16 @@ public class Player : MonoBehaviour
 			{
 				// マウスオーバーでプレビュー表示
 				GunEffect.Preview(touchedItem);
+				lastPreviewedItem_ = touchedItem;
 			}
 		}
 		else
 		{
+			if( lastPreviewedItem_ != null )
+			{
+				GunEffect.EndPreview();
+				lastPreviewedItem_ = null;
+			}
 			GunEffect.gameObject.SetActive(false);
 		}
 	}
