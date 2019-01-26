@@ -7,8 +7,7 @@ public class GameMgr : MonoBehaviour
     public int scoreLife;
     public int scoreHappiness;
     public int scoreHome;
-
-    public int item_num;
+	
 	public GravityGauge gravityGauge;
 
 

@@ -67,9 +67,7 @@ public class Item : MonoBehaviour
     {
 
         CalcConsumeGPoint();
-
-        FallSequence();
-
+		
         DeleteSequence();
 
 
@@ -103,32 +101,11 @@ public class Item : MonoBehaviour
         consumeGPoint = (int)Mathf.Floor(distance_param * gameMgr.GPointRate * itemGP);
     }
 
-    void FallSequence()
-    {
-        //マウスのオーバーレイを検出する
-        isTouched = MouseSequence();
-
-
-        //マウスが押されていたら
-        if (Input.GetMouseButtonDown(0))
-        {
-            //Gポイントが消費量より上かつfallflagがfalse
-            if (isTouched && !falledFlag)
-            {
-                //落下を成立させる
-                Fall();
-            }
-
-
-        }
-
-    }
-
     void DeleteSequence()
     {
         if(transform.position.x > 10)
         {
-            gameMgr.item_num -= 1;
+			GetComponentInParent<ItemGenerator>().FloatingItemList.Remove(this);
             GameObject.Destroy(transform.parent.gameObject);
             GameObject.Destroy(this.gameObject);
         }
@@ -159,7 +136,7 @@ public class Item : MonoBehaviour
         }
     }
 
-    bool MouseSequence()
+    public bool IsOnMouse()
     {
         Vector3 aTapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -187,9 +164,8 @@ public class Item : MonoBehaviour
     }
 
 
-    void Fall(){
-        
-
+    public void Fall()
+	{
         //
         //Gポイントを消費する
         gameMgr.gPoint -= consumeGPoint;
@@ -210,8 +186,11 @@ public class Item : MonoBehaviour
         rb.velocity = -vec_sub * firstspeed;
         //
         rb.AddForce( -vec_sub * force_amount);
-        
-    }
+
+		GetComponentInParent<ItemGenerator>().FloatingItemList.Remove(this);
+
+		isFalling = true;
+	}
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -221,13 +200,17 @@ public class Item : MonoBehaviour
             rb.constraints =  RigidbodyConstraints2D.FreezeAll;
             //fallflag on
             falledFlag = true;
-            gameMgr.item_num -= 1;
 
-            GameObject SESound = GameObject.Find("GameMgr");
+			GameObject SESound = GameObject.Find("GameMgr");
             AudioSource SE = SESound.GetComponent<AudioSource>();
             SE.Play();
             gameMgr.CountScore(this.gameObject);
-        }
+
+			Vector2 vec_sub = (Vector2)(transform.position - star.transform.position);
+			vec_sub.Normalize();
+			float power = 0.0001f * consumeGPoint;
+			AnimManager.AddShakeAnim(GameContext.MainCamera, vec_sub, power * 3, 10 * power, 0.05f, ParamType.Position);
+		}
     }
 
 }
