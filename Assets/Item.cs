@@ -8,6 +8,7 @@ public class Item : MonoBehaviour
 {
     [Tooltip("アイテム固有のGポイント倍率")] public float itemGP = 2;//アイテム固有のGpoint倍率
 
+    public Vector3 initialPos = new Vector3(0,8,0);
 
 
     public int pointLife;
@@ -17,7 +18,7 @@ public class Item : MonoBehaviour
     public float firstspeed = 2f;
     public float force_amount = 2000;
 
-    [Tooltip("回転角/1フレーム")] public float rad = 1;
+    [Tooltip("回転角/1フレーム")]public float rad = -0.2f;
 
     public GameMgr gameMgr;
 
@@ -26,6 +27,8 @@ public class Item : MonoBehaviour
     Rigidbody2D rb;
 
     public bool isTouched = false;
+
+    bool isFalling = false;
 
     public int consumeGPoint;//このアイテムが現在消費させるGポイント算出値
     bool falledFlag = false;//すでに落下処理が完了しているかどうか
@@ -49,7 +52,14 @@ public class Item : MonoBehaviour
             pivotTransform = transform.parent.transform;
         }
 
+        //座標系のinit
+        transform.position = initialPos;
         basePosY = transform.position.y;
+
+        //初期回転角
+        pivotTransform.Rotate(0, 0, Random.Range(gameMgr.startDegreeMin, gameMgr.startDegreeMax));
+        //transform.rotation = new Quaternion(0, 0, Random.Range(gameMgr.startDegreeMin, gameMgr.startDegreeMax), transform.rotation.w);
+        
     }
 
     // Update is called once per frame
@@ -62,11 +72,7 @@ public class Item : MonoBehaviour
 
 
 
-        //マウスカーソルが当たっていたら
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            Fall();
 
-        }
     }
 
     private void FixedUpdate()
@@ -120,22 +126,27 @@ public class Item : MonoBehaviour
 
     void RotatePivot()
     {
-        if (pivotTransform)
+        if (!isFalling && !falledFlag)
         {
-            pivotTransform.Rotate(new Vector3(0, 0, rad));
+            if (pivotTransform)
+            {
+                pivotTransform.Rotate(new Vector3(0, 0, rad));
+            }
         }
     }
 
     void Waveing() {
+        if (!isFalling && !falledFlag)
+        {
+            //transform.position = new Vector3(transform.position.x, basePosY + Mathf.Sin(t) , transform.position.z);
+            //transform.Translate(0, 2 * Mathf.Acos(t), 0);
+            //pos.x += Mathf.Sin(Time.time * speed) * 4f;
+            float y = transform.localPosition.y;
 
-        //transform.position = new Vector3(transform.position.x, basePosY + Mathf.Sin(t) , transform.position.z);
-        //transform.Translate(0, 2 * Mathf.Acos(t), 0);
-        //pos.x += Mathf.Sin(Time.time * speed) * 4f;
-        float y = transform.localPosition.y;
+            y += Mathf.Cos(Time.time * frequency) * amplitude;
 
-        y += Mathf.Cos(Time.time * frequency) * amplitude;
-
-        transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
+            transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
+        }
     }
 
     bool MouseSequence()
@@ -167,6 +178,8 @@ public class Item : MonoBehaviour
 
 
     void Fall(){
+        
+
         //
         //Gポイントを消費する
         gameMgr.gPoint -= consumeGPoint;
