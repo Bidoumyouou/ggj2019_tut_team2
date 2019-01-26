@@ -25,6 +25,11 @@ public class GameMgr : MonoBehaviour
 		set
 		{
 			gravityPoint_ = value;
+			if( gravityPoint_ <= 0 )
+			{
+				gravityPoint_ = 0;
+				// todo last shot
+			}
 			if( gravityGauge != null )
 			{
 				gravityGauge.SetGravityPoint(gravityPoint_);

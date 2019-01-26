@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GravityGunEffect : MonoBehaviour
+public class GravityGunEffect : MonoBehaviour, IColoredObject
 {
 	public LineRenderer ThunderPrefab;
 	public GameObject TargetPoint;
@@ -10,6 +11,7 @@ public class GravityGunEffect : MonoBehaviour
 	public float RandomRange;
 	public float UpdateTime;
 
+	Color color_;
 	float time_;
 	AudioSource audioSource_;
 	LineRenderer[] thunders_;
@@ -23,6 +25,7 @@ public class GravityGunEffect : MonoBehaviour
 		}
 		thunders_ = GetComponentsInChildren<LineRenderer>();
 		audioSource_ = GetComponent<AudioSource>();
+		color_ = ThunderPrefab.startColor;
 	}
 
 	// Update is called once per frame
@@ -33,8 +36,8 @@ public class GravityGunEffect : MonoBehaviour
 			thunders_[i].gameObject.SetActive(Input.GetMouseButton(0));
 		}
 		TargetPoint.SetActive(Input.GetMouseButton(0));
-		TargetPoint.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+		TargetPoint.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		if( Input.GetMouseButtonDown(0) )
 		{
 			audioSource_.Play();
@@ -65,5 +68,22 @@ public class GravityGunEffect : MonoBehaviour
 				}
 			}
 		}
+	}
+
+
+	public void SetColor(Color color)
+	{
+		color_ = color;
+		for( int i = 0; i < thunders_.Length; ++i )
+		{
+			thunders_[i].startColor = color_;
+			thunders_[i].endColor = color_;
+		}
+		TargetPoint.GetComponent<Image>().color = color_;
+	}
+
+	public Color GetColor()
+	{
+		return color_;
 	}
 }
