@@ -89,7 +89,7 @@ public class Item : MonoBehaviour
         //距離の算出
         float distanceFromCore; // アイテムの物理距離()コアとの
         float distanceFromSurface; //表面との物理距離
-        float coreRedious = star.GetComponent<SpriteRenderer>().bounds.size.x / 2;  //惑星の半径
+        float coreRedious = star.GetComponent<Collider2D>().bounds.size.x / 2;  //惑星の半径
 
 
         float distance_param; //補正値込みのスコア算出素点
@@ -226,6 +226,7 @@ public class Item : MonoBehaviour
             GameObject SESound = GameObject.Find("GameMgr");
             AudioSource SE = SESound.GetComponent<AudioSource>();
             SE.Play();
+            gameMgr.CountScore(this.gameObject);
         }
     }
 
