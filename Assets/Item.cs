@@ -8,6 +8,7 @@ public class Item : MonoBehaviour
 {
     [Tooltip("アイテム固有のGポイント倍率")] public float itemGP = 2;//アイテム固有のGpoint倍率
 
+    public Vector3 initialPos = new Vector3(0,8,0);
 
 
     public int pointLife;
@@ -17,7 +18,7 @@ public class Item : MonoBehaviour
     public float firstspeed = 2f;
     public float force_amount = 2000;
 
-    [Tooltip("回転角/1フレーム")] public float rad = 1;
+    [Tooltip("回転角/1フレーム")]public float rad = -0.2f;
 
     public GameMgr gameMgr;
 
@@ -51,7 +52,14 @@ public class Item : MonoBehaviour
             pivotTransform = transform.parent.transform;
         }
 
+        //座標系のinit
+        transform.position = initialPos;
         basePosY = transform.position.y;
+
+        //初期回転角
+        pivotTransform.Rotate(0, 0, Random.Range(gameMgr.startDegreeMin, gameMgr.startDegreeMax));
+        //transform.rotation = new Quaternion(0, 0, Random.Range(gameMgr.startDegreeMin, gameMgr.startDegreeMax), transform.rotation.w);
+        
     }
 
     // Update is called once per frame
@@ -64,11 +72,7 @@ public class Item : MonoBehaviour
 
 
 
-        //マウスカーソルが当たっていたら
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            Fall();
 
-        }
     }
 
     private void FixedUpdate()

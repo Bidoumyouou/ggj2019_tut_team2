@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemGenerator : MonoBehaviour
 {
     public GameMgr gameMgr;
+    public GameObject itemCorePivot;
 
     public List<GameObject> itemPrefabList;
 
@@ -26,7 +27,18 @@ public class ItemGenerator : MonoBehaviour
     void Generate()
     {
         //generatepivotとアイテムプレハブを生成して接着する
+        GameObject pivot = GameObject.Instantiate(itemCorePivot);
+        //アイテムをランダムに生成して接着する
+        int m = Random.Range(0, itemPrefabList.Count);
 
+
+        GameObject item = GameObject.Instantiate(itemPrefabList[m]);
+
+        item.transform.parent = pivot.transform;
+        pivot.transform.parent = transform;
+        //pivotの中心は惑星の中心
+
+        pivot.transform.localPosition = Vector3.zero;
     }
 
 }
