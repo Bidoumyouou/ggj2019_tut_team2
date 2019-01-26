@@ -1468,6 +1468,11 @@ PrefabInstance:
       propertyPath: ConsumeGText
       value: 
       objectReference: {fileID: 2091773972}
+    - target: {fileID: 548496895547026010, guid: 7289a3c223d4f724aa844beb183e5bca,
+        type: 3}
+      propertyPath: GGauge
+      value: 
+      objectReference: {fileID: 1236128070}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7289a3c223d4f724aa844beb183e5bca, type: 3}
 --- !u!1 &2009522843 stripped
