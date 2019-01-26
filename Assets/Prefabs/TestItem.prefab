@@ -125,7 +125,7 @@ MonoBehaviour:
   pointLife: 0
   pointHappiness: 0
   pointHome: 0
-  firstspeed: 1
+  firstspeed: 0.05
   force_amount: 2000
   rad: -0.3
   gameMgr: {fileID: 0}

@@ -55,7 +55,7 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 
 	public void Preview(Item item)
 	{
-		SetColor(ColorManager.MakeAlpha(DefaultColor, 0.3f));
+		SetColor(ColorManager.MakeAlpha(DefaultColor, 0.15f));
 		TargetPoint.transform.position = item.transform.position;
 
 		ConsumeGText.gameObject.SetActive(true);
