@@ -87,6 +87,21 @@ PrefabInstance:
       propertyPath: pointHome
       value: -1000
       objectReference: {fileID: 0}
+    - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
+        type: 3}
+      propertyPath: initialPos.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
+        type: 3}
+      propertyPath: amplitude
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
+        type: 3}
+      propertyPath: rad
+      value: -0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6676153223173387189, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
       propertyPath: m_Sprite
