@@ -18,7 +18,7 @@ public class GravityGauge : MonoBehaviour
 	public Text Text;
 
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
     {
 		MaxGravity = Gravity;
 		OldGravity = Gravity;
