@@ -133,7 +133,7 @@ MonoBehaviour:
   isTouched: 0
   consumeGPoint: 100
   frequency: 10
-  amplitude: 0.1
+  amplitude: 0.5
 --- !u!50 &6676153223173387176
 Rigidbody2D:
   serializedVersion: 4
