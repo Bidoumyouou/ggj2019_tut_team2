@@ -25,6 +25,7 @@ public class ItemGenerator : MonoBehaviour
 
     void Generate()
     {
+        //generatepivotとアイテムプレハブを生成して接着する
 
     }
 

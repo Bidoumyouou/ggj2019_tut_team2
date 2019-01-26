@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [Tooltip("アイテム固有のGポイント倍率")]public float itemGP = 2;//アイテム固有のGpoint倍率
+    [Tooltip("アイテム固有のGポイント倍率")] public float itemGP = 2;//アイテム固有のGpoint倍率
 
 
 
@@ -17,7 +17,7 @@ public class Item : MonoBehaviour
     public float firstspeed = 2f;
     public float force_amount = 2000;
 
-    [Tooltip("回転角/1フレーム")]public float rad = 1;
+    [Tooltip("回転角/1フレーム")] public float rad = 1;
 
     public GameMgr gameMgr;
 
@@ -32,6 +32,8 @@ public class Item : MonoBehaviour
 
     Transform pivotTransform;
 
+    float basePosY;
+    float t;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,8 @@ public class Item : MonoBehaviour
         {
             pivotTransform = transform.parent.transform;
         }
+
+        basePosY = transform.position.y;
     }
 
     // Update is called once per frame
@@ -54,10 +58,10 @@ public class Item : MonoBehaviour
 
         FallSequence();
 
-        
+
 
         //マウスカーソルが当たっていたら
-        if (Input.GetKeyDown(KeyCode.Z)){
+        if (Input.GetKeyDown(KeyCode.Z)) {
             Fall();
 
         }
@@ -65,7 +69,10 @@ public class Item : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //スイングバイ
         RotatePivot();
+        //ゆらゆら
+        Waveing();
     }
 
 
@@ -93,7 +100,7 @@ public class Item : MonoBehaviour
         //マウスのオーバーレイを検出する
         isTouched = MouseSequence();
 
-  
+
         //マウスが押されていたら
         if (Input.GetMouseButtonDown(0))
         {
@@ -104,11 +111,10 @@ public class Item : MonoBehaviour
                 Fall();
             }
 
-           
+
         }
 
     }
-
 
     void RotatePivot()
     {
@@ -116,6 +122,18 @@ public class Item : MonoBehaviour
         {
             pivotTransform.Rotate(new Vector3(0, 0, rad));
         }
+    }
+
+    void Waveing() {
+        t =  1;
+        //transform.position = new Vector3(transform.position.x, basePosY + Mathf.Sin(t) , transform.position.z);
+        //transform.Translate(0, 2 * Mathf.Acos(t), 0);
+        //pos.x += Mathf.Sin(Time.time * speed) * 4f;
+        float y = transform.localPosition.y;
+
+        y += Mathf.Cos(Time.time * t) * 1;
+
+        transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
     }
 
     bool MouseSequence()
