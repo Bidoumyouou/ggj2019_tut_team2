@@ -33,7 +33,7 @@ public class Item : MonoBehaviour
     Transform pivotTransform;
 
     float basePosY;
-    float t;
+    public float frequency;
     // Start is called before the first frame update
     void Start()
     {
@@ -123,15 +123,16 @@ public class Item : MonoBehaviour
             pivotTransform.Rotate(new Vector3(0, 0, rad));
         }
     }
+    public float r_speed = 0.1f;
 
     void Waveing() {
-        t =  1;
+
         //transform.position = new Vector3(transform.position.x, basePosY + Mathf.Sin(t) , transform.position.z);
         //transform.Translate(0, 2 * Mathf.Acos(t), 0);
         //pos.x += Mathf.Sin(Time.time * speed) * 4f;
         float y = transform.localPosition.y;
 
-        y += Mathf.Cos(Time.time * t) * 1;
+        y += Mathf.Cos(Time.time * frequency) * r_speed;
 
         transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
     }
