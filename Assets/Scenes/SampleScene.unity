@@ -386,6 +386,7 @@ MonoBehaviour:
   - {fileID: 1405692098700303019, guid: 218cb4d3996de2f458bef7832a9536ba, type: 3}
   - {fileID: 6453258539415538420, guid: f1a07f048e8433e4d98fde2ef2d4be1c, type: 3}
   - {fileID: 6453258539415538420, guid: daf11c6ceb0f9f04f86272afad43f850, type: 3}
+  - {fileID: 8136123075235233738, guid: ccd6d4dd355787440a9b136fa1858667, type: 3}
   frequency: 1
   maxItemNum: 5
 --- !u!1 &517474508
