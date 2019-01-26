@@ -145,7 +145,6 @@ MonoBehaviour:
   scoreLife: 0
   scoreHappiness: 0
   scoreHome: 0
-  item_num: 0
   gravityGauge: {fileID: 1236128070}
   startDegreeMin: 50
   startDegreeMax: 60
@@ -962,6 +961,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1334864077}
   - component: {fileID: 1334864076}
+  - component: {fileID: 1334864078}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -1032,6 +1032,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1334864078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334864075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06dc365aeb46b1418a0f82ccc3c8053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemGen: {fileID: 468233858}
+  GunEffect: {fileID: 2009522846}
 --- !u!1 &1387401777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,6 +1427,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 548496894860563060, guid: 7289a3c223d4f724aa844beb183e5bca,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 548496895330924563, guid: 7289a3c223d4f724aa844beb183e5bca,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -1421,6 +1440,26 @@ PrefabInstance:
     - target: {fileID: 548496895330924563, guid: 7289a3c223d4f724aa844beb183e5bca,
         type: 3}
       propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 548496895547026010, guid: 7289a3c223d4f724aa844beb183e5bca,
+        type: 3}
+      propertyPath: DefaultColor.r
+      value: 0.2784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 548496895547026010, guid: 7289a3c223d4f724aa844beb183e5bca,
+        type: 3}
+      propertyPath: DefaultColor.g
+      value: 0.9725491
+      objectReference: {fileID: 0}
+    - target: {fileID: 548496895547026010, guid: 7289a3c223d4f724aa844beb183e5bca,
+        type: 3}
+      propertyPath: DefaultColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 548496895547026010, guid: 7289a3c223d4f724aa844beb183e5bca,
+        type: 3}
+      propertyPath: DefaultColor.a
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1533,3 +1572,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2009522846 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 548496895547026010, guid: 7289a3c223d4f724aa844beb183e5bca,
+    type: 3}
+  m_PrefabInstance: {fileID: 2003459083}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009522843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071ecac9554024a47b1523c9f0f03a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

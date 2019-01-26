@@ -5,31 +5,44 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	public ItemGenerator ItemGen;
+	public GravityGunEffect GunEffect;
 
 	// Start is called before the first frame update
 	void Start()
-    {
-        
-    }
+	{
+	}
 
     // Update is called once per frame
     void Update()
-    {
-		if( Input.GetMouseButtonDown(0) )
+	{
+		Item touchedItem = null;
+		foreach( Item item in ItemGen.FloatingItemList )
 		{
-			Item touchedItem = null;
-			foreach( Item item in ItemGen.FloatingItemList )
+			if( item.IsOnMouse() )
 			{
-				if( item.IsOnMouse() )
-				{
-					touchedItem = item;
-					break;
-				}
+				touchedItem = item;
+				break;
 			}
-			if( touchedItem != null )
+		}
+
+		if( touchedItem != null )
+		{
+			GunEffect.gameObject.SetActive(true);
+			if( Input.GetMouseButtonDown(0) )
 			{
+				// クリックで発射
+				GunEffect.Fire();
 				touchedItem.Fall();
 			}
+			else
+			{
+				// マウスオーバーでプレビュー表示
+				GunEffect.Preview(touchedItem);
+			}
+		}
+		else
+		{
+			GunEffect.gameObject.SetActive(false);
 		}
 	}
 }

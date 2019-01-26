@@ -10,6 +10,7 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 	public float VertexPerLength;
 	public float RandomRange;
 	public float UpdateTime;
+	public Color DefaultColor;
 
 	Color color_;
 	float time_;
@@ -17,13 +18,13 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 	LineRenderer[] thunders_;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 		for( int i = 0; i < 2; ++i )
 		{
 			Instantiate(ThunderPrefab, this.transform);
 		}
-		thunders_ = GetComponentsInChildren<LineRenderer>();
+		thunders_ = GetComponentsInChildren<LineRenderer>(includeInactive: true);
 		audioSource_ = GetComponent<AudioSource>();
 		color_ = ThunderPrefab.startColor;
 	}
@@ -31,19 +32,26 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 	// Update is called once per frame
 	void Update()
 	{
-		for( int i = 0; i < thunders_.Length; ++i )
-		{
-			thunders_[i].gameObject.SetActive(Input.GetMouseButton(0));
-		}
-		TargetPoint.SetActive(Input.GetMouseButton(0));
-
-		TargetPoint.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		if( Input.GetMouseButtonDown(0) )
-		{
-			audioSource_.Play();
-		}
-
 		Animate();
+	}
+
+	public void Fire()
+	{
+		GravityGunEffect remainGunEffect = Instantiate(this, this.transform.position, this.transform.rotation);
+		remainGunEffect.FireAndDestroy();
+	}
+
+	public void FireAndDestroy()
+	{
+		audioSource_.Play();
+		SetColor(DefaultColor);
+		AnimManager.AddAnim(this, 0.0f, ParamType.AlphaColor, AnimType.Time, 0.5f, 0.5f, endOption: AnimEndOption.Destroy);
+	}
+
+	public void Preview(Item item)
+	{
+		SetColor(ColorManager.MakeAlpha(DefaultColor, 0.3f));
+		TargetPoint.transform.position = item.transform.position;
 	}
 
 	void Animate()
@@ -79,7 +87,7 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 			thunders_[i].startColor = color_;
 			thunders_[i].endColor = color_;
 		}
-		TargetPoint.GetComponent<Image>().color = color_;
+		TargetPoint.GetComponent<SpriteRenderer>().color = color_;
 	}
 
 	public Color GetColor()
