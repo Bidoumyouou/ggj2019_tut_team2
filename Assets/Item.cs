@@ -67,9 +67,7 @@ public class Item : MonoBehaviour
     {
 
         CalcConsumeGPoint();
-
-        FallSequence();
-
+		
         DeleteSequence();
 
 
@@ -101,27 +99,6 @@ public class Item : MonoBehaviour
 
         //計算式: kyori素点 * 50 * ItemGP
         consumeGPoint = (int)Mathf.Floor(distance_param * gameMgr.GPointRate * itemGP);
-    }
-
-    void FallSequence()
-    {
-        //マウスのオーバーレイを検出する
-        isTouched = MouseSequence();
-
-
-        //マウスが押されていたら
-        if (Input.GetMouseButtonDown(0))
-        {
-            //Gポイントが消費量より上かつfallflagがfalse
-            if (isTouched && !falledFlag)
-            {
-                //落下を成立させる
-                Fall();
-            }
-
-
-        }
-
     }
 
     void DeleteSequence()
@@ -159,7 +136,7 @@ public class Item : MonoBehaviour
         }
     }
 
-    bool MouseSequence()
+    public bool IsOnMouse()
     {
         Vector3 aTapPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -187,9 +164,8 @@ public class Item : MonoBehaviour
     }
 
 
-    void Fall(){
-        
-
+    public void Fall()
+	{
         //
         //Gポイントを消費する
         gameMgr.gPoint -= consumeGPoint;
@@ -212,6 +188,8 @@ public class Item : MonoBehaviour
         rb.AddForce( -vec_sub * force_amount);
 
 		GetComponentInParent<ItemGenerator>().FloatingItemList.Remove(this);
+
+		isFalling = true;
 	}
 
     void OnCollisionEnter2D(Collision2D col)
