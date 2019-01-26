@@ -8,9 +8,9 @@ public class Item : MonoBehaviour
 {
     [Tooltip("アイテム固有のGポイント倍率")]public float itemGP = 2;//アイテム固有のGpoint倍率
 
-    int pointLife;
-    int pointHappiness;
-    int pointHome;
+    public int pointLife;
+    public int pointHappiness;
+    public int pointHome;
 
     public float firstspeed = 2f;
     public float force_amount = 2000;
