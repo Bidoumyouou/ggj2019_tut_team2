@@ -31,6 +31,10 @@ public class ResultControl : MonoBehaviour
 
     int result_state = 0;//0..フェードインする 1.プレイヤーを消す 2.フェードアウトする 3.. アニメーション開始 
 
+    public Text life_text;
+    public Text happy_text;
+    public Text home_text;
+
     public string[] resultStr = new string[3];
     // Start is called before the first frame update
     void Start()
@@ -63,10 +67,14 @@ public class ResultControl : MonoBehaviour
                 resultStr[2] = word.str;
             }
         }
-    }
+    life_text.text  =resultStr[0];
+    happy_text.text = resultStr[1];
+    home_text.text = resultStr[2];
+
+}
 
 
-    void Update()
+void Update()
     {
         //リザルトテキストの編集
         CalcResultText();
