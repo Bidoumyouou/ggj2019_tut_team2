@@ -24,6 +24,8 @@ public class GameMgr : MonoBehaviour
     [Tooltip("初期生成角度最大値")] public float startDegreeMax = 60;
     [Tooltip("初期生成角度最大値")] public float endDegree = -50;
 
+    [HideInInspector] public bool LastItemFlag =false; //これがonになると何かが着地したときゲームが終わる
+
 
     public void ChangeGameMode(GameState _state)
     {
@@ -67,7 +69,13 @@ public class GameMgr : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E))
         {
-            resultManager.SetActive(true);
+            ChangeGameMode(GameState.result);
+            //resultManager.SetActive(true);
+        }
+
+        if(gPoint <= 0)
+        {
+            LastItemFlag = true;
         }
     }
 
