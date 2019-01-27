@@ -293,7 +293,7 @@ MonoBehaviour:
   startDegreeMax: 60
   endDegree: -50
   LastItemFlag: 0
-  startGPoint: 3000
+  startGPoint: 2
   correctionDistance: 1.5
   GPointRate: 50
 --- !u!4 &433123661
@@ -1866,6 +1866,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 883320}
     m_Modifications:
+    - target: {fileID: 6654158389623631190, guid: b965bd93e5350044ab85850dc5574295,
+        type: 3}
+      propertyPath: m_Name
+      value: LifePoint
+      objectReference: {fileID: 0}
     - target: {fileID: 6654158389623631185, guid: b965bd93e5350044ab85850dc5574295,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1970,11 +1975,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6654158389623631190, guid: b965bd93e5350044ab85850dc5574295,
-        type: 3}
-      propertyPath: m_Name
-      value: LifePoint
       objectReference: {fileID: 0}
     - target: {fileID: 6654158389909590758, guid: b965bd93e5350044ab85850dc5574295,
         type: 3}
