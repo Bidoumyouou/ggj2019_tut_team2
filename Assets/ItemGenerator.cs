@@ -58,14 +58,14 @@ public class ItemGenerator : MonoBehaviour
 
         GameObject item;
         //スタートオブジェクトの設置
-        if(gameMgr.state == GameState.title && FloatingItemList.Count == 0) {
+        if(GameMgr.state == GameState.title && FloatingItemList.Count == 0) {
             pivot.transform.eulerAngles = new Vector3(0, 0, 0);
             item = GameObject.Instantiate(startItemPrefab);
             FloatingItemList.Add(item.GetComponent<Item>());
             item.transform.parent = pivot.transform;
 
         }
-        else if(gameMgr.state == GameState.maingame)
+        else if(GameMgr.state == GameState.maingame)
         //そうでないオブジェクトの設置
         {
             int m = Random.Range(0, itemPrefabList.Count);

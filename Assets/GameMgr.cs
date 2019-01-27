@@ -17,7 +17,7 @@ public class GameMgr : MonoBehaviour
 	
 	public GravityGauge gravityGauge;
 
-    public GameState state = GameState.title;
+    public static GameState state = GameState.title;
 
     [Tooltip("初期生成角度最小値")] public float startDegreeMin = 50;
     [Tooltip("初期生成角度最大値")] public float startDegreeMax = 60;
