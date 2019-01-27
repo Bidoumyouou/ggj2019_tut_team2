@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 			if( Input.GetMouseButtonDown(0) )
 			{
 				// クリックで発射
-				GunEffect.Fire();
+				GunEffect.Fire(touchedItem);
 				touchedItem.Fall();
 			}
 			else

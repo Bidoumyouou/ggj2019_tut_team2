@@ -11,9 +11,11 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 	public float RandomRange;
 	public float UpdateTime;
 	public Color DefaultColor;
+	public Color HighCostColor;
 	public Text ConsumeGText;
 	public GravityGauge GGauge;
 	public float RemainTime = 0.5f;
+	public float ScaleCoeff = 0.2f;
 
 	Color color_;
 	float time_;
@@ -38,31 +40,38 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 		Animate();
 	}
 
-	public void Fire()
+	public void Fire(Item item)
 	{
 		// これ自体は残して、プレイヤーの腕に追随しないエフェクトだけ出して消したいので、別オブジェクトにしてFire＆Destroy!
 		GravityGunEffect remainGunEffect = Instantiate(this, this.transform.position, this.transform.rotation);
 		remainGunEffect.transform.localScale = this.transform.lossyScale;
+		remainGunEffect.SetColor(GetDesiredColor(item));
 		remainGunEffect.FireAndDestroy();
 	}
 
 	public void FireAndDestroy()
 	{
 		audioSource_.Play();
-		SetColor(DefaultColor);
 		AnimManager.AddAnim(this, 0.0f, ParamType.AlphaColor, AnimType.Time, 0.2f, RemainTime, endOption: AnimEndOption.Destroy);
 	}
 
 	public void Preview(Item item)
 	{
-		SetColor(ColorManager.MakeAlpha(DefaultColor, 0.15f));
+		SetColor(ColorManager.MakeAlpha(GetDesiredColor(item), 0.15f));
 		TargetPoint.transform.position = item.transform.position;
+		TargetPoint.transform.localScale = Vector3.one * ScaleCoeff * (float)item.consumeGPoint / 1000.0f;
 
 		ConsumeGText.gameObject.SetActive(true);
-		ConsumeGText.rectTransform.anchoredPosition = Input.mousePosition; // item.transform.position + Vector3.back;
+		ConsumeGText.rectTransform.anchoredPosition = Input.mousePosition;
 		ConsumeGText.text = item.consumeGPoint.ToString();
+		ConsumeGText.color = GetDesiredColor(item);
 
 		GGauge.SetPreviewPoint(Mathf.Max(0, (int)GGauge.Gravity - item.consumeGPoint));
+	}
+
+	Color GetDesiredColor(Item item)
+	{
+		return Color.Lerp(DefaultColor, HighCostColor, (float)item.consumeGPoint / 1000.0f);
 	}
 
 	public void EndPreview()
@@ -104,7 +113,7 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 			thunders_[i].startColor = color_;
 			thunders_[i].endColor = color_;
 		}
-		TargetPoint.GetComponent<SpriteRenderer>().color = color_;
+		TargetPoint.GetComponentInChildren<SpriteRenderer>().color = color_;
 	}
 
 	public Color GetColor()
