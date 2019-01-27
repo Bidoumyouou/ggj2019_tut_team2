@@ -16,6 +16,7 @@ public class GameMgr : MonoBehaviour
     public int scoreHome;
 	
 	public GravityGauge gravityGauge;
+    public GameObject resultManager;
 
     public static GameState state = GameState.title;
 
@@ -64,7 +65,10 @@ public class GameMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.E))
+        {
+            resultManager.SetActive(true);
+        }
     }
 
     public void CountScore(GameObject _itemobj)
