@@ -90,7 +90,12 @@ PrefabInstance:
     - target: {fileID: 6453258539415538410, guid: 57ec9bfa0030dd34198ea95c47ed189c,
         type: 3}
       propertyPath: itemGP
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453258539415538410, guid: 57ec9bfa0030dd34198ea95c47ed189c,
+        type: 3}
+      propertyPath: fallSE
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57ec9bfa0030dd34198ea95c47ed189c, type: 3}

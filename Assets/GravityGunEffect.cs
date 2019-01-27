@@ -13,6 +13,7 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 	public Color DefaultColor;
 	public Color HighCostColor;
 	public Text ConsumeGText;
+	public Text LastShotText;
 	public GravityGauge GGauge;
 	public float RemainTime = 0.5f;
 	public float ScaleCoeff = 0.2f;
@@ -21,6 +22,7 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 	float time_;
 	AudioSource audioSource_;
 	LineRenderer[] thunders_;
+	bool isLastShot_ = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -46,13 +48,8 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 		GravityGunEffect remainGunEffect = Instantiate(this, this.transform.position, this.transform.rotation);
 		remainGunEffect.transform.localScale = this.transform.lossyScale;
 		remainGunEffect.SetColor(GetDesiredColor(item));
-		remainGunEffect.FireAndDestroy();
-	}
-
-	public void FireAndDestroy()
-	{
 		audioSource_.Play();
-		AnimManager.AddAnim(this, 0.0f, ParamType.AlphaColor, AnimType.Time, 0.2f, RemainTime, endOption: AnimEndOption.Destroy);
+		AnimManager.AddAnim(remainGunEffect, 0.0f, ParamType.AlphaColor, AnimType.Time, 0.2f, (isLastShot_ ? RemainTime * 3 : RemainTime), endOption: AnimEndOption.Destroy);
 	}
 
 	public void Preview(Item item)
@@ -61,23 +58,32 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 		TargetPoint.transform.position = item.transform.position;
 		TargetPoint.transform.localScale = Vector3.one * ScaleCoeff * (float)item.consumeGPoint / 1000.0f;
 
+		isLastShot_ = item.consumeGPoint >= GGauge.Gravity;
+
 		ConsumeGText.gameObject.SetActive(true);
+		LastShotText.gameObject.SetActive(isLastShot_);
+		LastShotText.color = Color.Lerp(Color.red, Color.white, (Mathf.Sin(Time.time * 20.0f) + 1) / 2 + 0.5f);
 		ConsumeGText.rectTransform.anchoredPosition = Input.mousePosition;
 		ConsumeGText.text = item.consumeGPoint.ToString();
 		ConsumeGText.color = GetDesiredColor(item);
+		ConsumeGText.transform.localScale = Vector3.one * Mathf.Sqrt((float)item.consumeGPoint / 1000.0f);
 
 		GGauge.SetPreviewPoint(Mathf.Max(0, (int)GGauge.Gravity - item.consumeGPoint));
 	}
 
 	Color GetDesiredColor(Item item)
 	{
-		return Color.Lerp(DefaultColor, HighCostColor, (float)item.consumeGPoint / 1000.0f);
+		if( isLastShot_ )
+			return HighCostColor;
+
+		return Color.Lerp(DefaultColor, HighCostColor, Mathf.Clamp01((float)(item.consumeGPoint - 100) / 500.0f));
 	}
 
 	public void EndPreview()
 	{
 		ConsumeGText.gameObject.SetActive(false);
 		GGauge.SetPreviewPoint((int)GGauge.Gravity);
+		isLastShot_ = false;
 	}
 
 	void Animate()
@@ -101,6 +107,8 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 					thunders_[i].SetPosition(pi, linePosition);
 				}
 			}
+
+			time_ = 0;
 		}
 	}
 
