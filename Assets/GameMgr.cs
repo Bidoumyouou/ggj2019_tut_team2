@@ -69,7 +69,8 @@ public class GameMgr : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E))
         {
-            resultManager.SetActive(true);
+            ChangeGameMode(GameState.result);
+            //resultManager.SetActive(true);
         }
 
         if(gPoint <= 0)
