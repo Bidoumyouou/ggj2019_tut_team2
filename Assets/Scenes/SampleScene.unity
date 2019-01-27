@@ -293,7 +293,7 @@ MonoBehaviour:
   startDegreeMax: 60
   endDegree: -50
   LastItemFlag: 0
-  startGPoint: 2
+  startGPoint: 4000
   correctionDistance: 1.5
   GPointRate: 50
 --- !u!4 &433123661
@@ -1706,6 +1706,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1296695698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1899186004, guid: 7ea14b8af3ca7e34d9f7ae9987b9593d,
+    type: 3}
+  m_PrefabInstance: {fileID: 692768028}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &1296695702
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296695698}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: b761f360d4eb0ce4ab8684e3e42f4e1e, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: b761f360d4eb0ce4ab8684e3e42f4e1e, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1334864075
 GameObject:
   m_ObjectHideFlags: 0
