@@ -34,6 +34,7 @@ public class SoundManager : MonoBehaviour
 		Refrigeator,
 		Rumba,
 		Cow,
+		Cat,
 	}
 
 	public AudioClip[] FallClips;
