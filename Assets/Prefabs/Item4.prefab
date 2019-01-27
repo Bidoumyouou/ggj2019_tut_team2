@@ -12,6 +12,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item4
       objectReference: {fileID: 0}
+    - target: {fileID: 6676153223173387189, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 29ec5d8c61e48cc4caf188daaa9268b6,
+        type: 3}
     - target: {fileID: 6676153223173387188, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -85,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
       propertyPath: itemGP
-      value: 2
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
@@ -122,12 +128,6 @@ PrefabInstance:
       propertyPath: frequency
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 6676153223173387189, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 29ec5d8c61e48cc4caf188daaa9268b6,
-        type: 3}
     - target: {fileID: 6676153223173387190, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
       propertyPath: m_Offset.x
