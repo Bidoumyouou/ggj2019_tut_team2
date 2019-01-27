@@ -12,6 +12,8 @@ public class Item : MonoBehaviour
 
     public bool isStartItem = false;
 
+	public Sprite afterImage;
+
     public int pointLife;
     public int pointHappiness;
     public int pointHome;
@@ -246,12 +248,17 @@ public class Item : MonoBehaviour
             falledFlag = true;
 
 			GameContext.SoundManager.PlayFall(this);
-			gameMgr.CountScore(this.gameObject);
+			gameMgr.OnItemFall(this);
 
 			Vector2 vec_sub = (Vector2)(transform.position - star.transform.position);
 			vec_sub.Normalize();
 			float power = 0.0001f * consumeGPoint;
 			AnimManager.AddShakeAnim(GameContext.MainCamera, vec_sub, power * 6, 20 * power, 0.05f, ParamType.Position);
+
+			if( afterImage != null )
+			{
+				GetComponent<SpriteRenderer>().sprite = afterImage;
+			}
 		}
     }
 
