@@ -9,6 +9,7 @@ public class GameMgr : MonoBehaviour
     public int scoreHome;
 	
 	public GravityGauge gravityGauge;
+    public GameObject resultManager;
 
 
     [Tooltip("初期生成角度最小値")] public float startDegreeMin = 50;
@@ -51,7 +52,10 @@ public class GameMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.E))
+        {
+            resultManager.SetActive(true);
+        }
     }
 
     public void CountScore(GameObject _itemobj)
