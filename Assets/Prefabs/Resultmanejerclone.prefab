@@ -930,7 +930,7 @@ GameObject:
   - component: {fileID: 5102630478499821173}
   - component: {fileID: 1635409775}
   m_Layer: 0
-  m_Name: ResultManager
+  m_Name: Resultmanejerclone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
