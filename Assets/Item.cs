@@ -262,6 +262,11 @@ public class Item : MonoBehaviour
 			{
 				GetComponent<SpriteRenderer>().sprite = afterImage;
 			}
+
+            if (gameMgr.LastItemFlag)
+            {
+                gameMgr.ChangeGameMode(GameState.result);
+            }
 		}
     }
 
