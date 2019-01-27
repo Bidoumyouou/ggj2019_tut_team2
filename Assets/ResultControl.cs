@@ -41,12 +41,16 @@ public class ResultControl : MonoBehaviour
             FadeOut();
             return;
         }
+        else
+        {
 
+        }
     }
 
     private void ResultPreparation()
     {
         Destroy(player);
+        fadeOut = true;
 
     }
 
