@@ -253,6 +253,11 @@ public class Item : MonoBehaviour
 			float power = 0.0001f * consumeGPoint;
 			AnimManager.AddShakeAnim(GameContext.MainCamera, vec_sub, power * 3, 10 * power, 0.05f, ParamType.Position);
 
+            //最後のアイテムだったらゲームを終了させる
+            if (gameMgr.LastItemFlag)
+            {
+                gameMgr.ChangeGameMode(GameState.result);
+            }
 		}
     }
 
