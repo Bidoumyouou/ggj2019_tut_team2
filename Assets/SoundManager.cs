@@ -24,12 +24,16 @@ public class SoundManager : MonoBehaviour
 		Bath,
 		Bicycle,
 		Chest,
+		Chicken,
 		Clock,
 		Gasstove,
 		Light,
+		Manga,
 		Piano,
+		Pig,
 		Refrigeator,
 		Rumba,
+		Cow,
 	}
 
 	public AudioClip[] FallClips;
@@ -82,6 +86,9 @@ public class SoundManager : MonoBehaviour
 
 	public void PlayMusic(Item item)
 	{
-		targetVolumes_[(int)item.musicTrack] = 1.0f;
+		if( item.musicTrack != MusicTrackType.None )
+		{
+			targetVolumes_[(int)item.musicTrack - 1] = 1.0f;
+		}
 	}
 }
