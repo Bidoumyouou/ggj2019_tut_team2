@@ -16,6 +16,20 @@ public class SoundManager : MonoBehaviour
 	public enum MusicTrackType
 	{
 		None,
+		Kick,
+		Hihat,
+		Snare,
+		Clap,
+		Fillin,
+		Bath,
+		Bicycle,
+		Chest,
+		Clock,
+		Gasstove,
+		Light,
+		Piano,
+		Refrigeator,
+		Rumba,
 	}
 
 	public AudioClip[] FallClips;
@@ -66,8 +80,8 @@ public class SoundManager : MonoBehaviour
 		source.Play();
 	}
 
-	public void PlayMusic(MusicTrackType type)
+	public void PlayMusic(Item item)
 	{
-		targetVolumes_[(int)type] = 1.0f;
+		targetVolumes_[(int)item.musicTrack] = 1.0f;
 	}
 }

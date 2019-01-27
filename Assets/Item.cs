@@ -21,7 +21,9 @@ public class Item : MonoBehaviour
     public float firstspeed = 2f;
     public float force_amount = 2000;
 
+	
 	public SoundManager.FallSEType fallSE;
+	public SoundManager.MusicTrackType musicTrack;
 
 	[Tooltip("回転角/1フレーム")]public float rad = -0.2f;
 
@@ -248,6 +250,7 @@ public class Item : MonoBehaviour
             falledFlag = true;
 
 			GameContext.SoundManager.PlayFall(this);
+			GameContext.SoundManager.PlayMusic(this);
 			gameMgr.OnItemFall(this);
 
 			Vector2 vec_sub = (Vector2)(transform.position - star.transform.position);
