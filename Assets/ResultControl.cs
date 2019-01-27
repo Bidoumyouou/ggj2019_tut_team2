@@ -12,6 +12,8 @@ public class ResultWord {
 
 public class ResultControl : MonoBehaviour
 {
+    public GameObject bgtext;
+
 
     GameMgr gameMgr;
     public Image fadeTex;
@@ -37,6 +39,12 @@ public class ResultControl : MonoBehaviour
 
     public string[] resultStr = new string[3];
     // Start is called before the first frame update
+    private void Awake()
+    {
+        bgtext.SetActive(false);
+
+    }
+
     void Start()
     {
         gameMgr = GameObject.Find("GameMgr").GetComponent<GameMgr>();
@@ -127,5 +135,9 @@ void Update()
     void DoText()
     {
         Debug.Log("Result Text is Apper");
+        if (!bgtext.active)
+        {
+            bgtext.SetActive(true);
+        }
     }
 }

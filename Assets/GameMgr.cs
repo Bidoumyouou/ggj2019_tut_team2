@@ -79,6 +79,14 @@ public class GameMgr : MonoBehaviour
         {
             LastItemFlag = true;
         }
+
+        if(GameState.result == state)
+        {
+            if (!resultManager.active)
+            {
+                resultManager.SetActive(true);
+            }
+        }
     }
 
     public void OnItemFall(Item item)
