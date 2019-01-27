@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
       propertyPath: itemGP
-      value: 1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
@@ -116,12 +116,12 @@ PrefabInstance:
     - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
       propertyPath: rad
-      value: -0.2
+      value: -0.23
       objectReference: {fileID: 0}
     - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
       propertyPath: initialPos.y
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
