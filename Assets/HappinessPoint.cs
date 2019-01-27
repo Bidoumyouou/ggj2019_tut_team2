@@ -14,6 +14,8 @@ public class HappinessPoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Text = GetComponentInChildren<Text>();
+
         GameManager = GameObject.Find("GameMgr");
         TextCurrentGravity = GameManager.GetComponent<GameMgr>().scoreHappiness;
     }
