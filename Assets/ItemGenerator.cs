@@ -10,6 +10,7 @@ public class ItemGenerator : MonoBehaviour
     public GameObject itemCorePivot;
 
     public List<GameObject> itemPrefabList;
+    public GameObject startItemPrefab;
 
 	public List<Item> FloatingItemList { get; private set; } = new List<Item>();
 
@@ -47,19 +48,36 @@ public class ItemGenerator : MonoBehaviour
         time += Time.deltaTime;
     }
 
+    
+
     void Generate()
     {
         //generatepivotとアイテムプレハブを生成して接着する
         GameObject pivot = GameObject.Instantiate(itemCorePivot);
         //アイテムをランダムに生成して接着する
-        int m = Random.Range(0, itemPrefabList.Count);
+
+        GameObject item;
+        //スタートオブジェクトの設置
+        if(gameMgr.state == GameState.title && FloatingItemList.Count == 0) {
+            pivot.transform.eulerAngles = new Vector3(0, 0, 0);
+            item = GameObject.Instantiate(startItemPrefab);
+            FloatingItemList.Add(item.GetComponent<Item>());
+            item.transform.parent = pivot.transform;
+
+        }
+        else if(gameMgr.state == GameState.maingame)
+        //そうでないオブジェクトの設置
+        {
+            int m = Random.Range(0, itemPrefabList.Count);
+            item = GameObject.Instantiate(itemPrefabList[m]);
+            FloatingItemList.Add(item.GetComponent<Item>());
+            item.transform.parent = pivot.transform;
+
+        }
 
 
-        GameObject item = GameObject.Instantiate(itemPrefabList[m]);
-		FloatingItemList.Add(item.GetComponent<Item>());
 
 
-        item.transform.parent = pivot.transform;
         pivot.transform.parent = transform;
         //pivotの中心は惑星の中心
 
