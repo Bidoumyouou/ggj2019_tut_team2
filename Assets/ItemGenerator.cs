@@ -68,9 +68,15 @@ public class ItemGenerator : MonoBehaviour
         else if(GameMgr.state == GameState.maingame)
         //そうでないオブジェクトの設置
         {
-            int m = Random.Range(0, itemPrefabList.Count);
-            item = GameObject.Instantiate(itemPrefabList[m]);
-            FloatingItemList.Add(item.GetComponent<Item>());
+			bool existSame = true;
+			int m = 0;
+			while( existSame )
+			{
+				m = Random.Range(0, itemPrefabList.Count);
+				existSame = FloatingItemList.Find((Item i) => i.name == itemPrefabList[m].name + "(Clone)") != null;
+			}
+			item = GameObject.Instantiate(itemPrefabList[m]);
+			FloatingItemList.Add(item.GetComponent<Item>());
             item.transform.parent = pivot.transform;
 
         }
