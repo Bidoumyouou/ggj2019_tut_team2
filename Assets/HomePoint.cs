@@ -23,6 +23,8 @@ public class HomePoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Text.text = TextCurrentGravity.ToString();
+
         int nowPoint = GameManager.GetComponent<GameMgr>().scoreHome;
         if (nowPoint==TextCurrentGravity)
         {
@@ -44,7 +46,6 @@ public class HomePoint : MonoBehaviour
                 TextCurrentGravity = nowPoint;
             }
         }
-        Text.text = TextCurrentGravity.ToString();
 
     }
 }
