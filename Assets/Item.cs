@@ -10,6 +10,7 @@ public class Item : MonoBehaviour
 
     public Vector3 initialPos = new Vector3(0,8,0);
 
+    public bool isStartItem = false;
 
     public int pointLife;
     public int pointHappiness;
