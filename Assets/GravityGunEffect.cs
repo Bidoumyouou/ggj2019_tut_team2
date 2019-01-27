@@ -65,13 +65,14 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 		ConsumeGText.rectTransform.anchoredPosition = Input.mousePosition;
 		ConsumeGText.text = item.consumeGPoint.ToString();
 		ConsumeGText.color = GetDesiredColor(item);
+		ConsumeGText.transform.localScale = Vector3.one * Mathf.Sqrt((float)item.consumeGPoint / 1000.0f);
 
 		GGauge.SetPreviewPoint(Mathf.Max(0, (int)GGauge.Gravity - item.consumeGPoint));
 	}
 
 	Color GetDesiredColor(Item item)
 	{
-		return Color.Lerp(DefaultColor, HighCostColor, (float)item.consumeGPoint / 1000.0f);
+		return Color.Lerp(DefaultColor, HighCostColor, Mathf.Clamp01((float)(item.consumeGPoint - 100) / 500.0f));
 	}
 
 	public void EndPreview()

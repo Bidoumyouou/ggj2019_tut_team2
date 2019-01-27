@@ -251,8 +251,7 @@ public class Item : MonoBehaviour
 			Vector2 vec_sub = (Vector2)(transform.position - star.transform.position);
 			vec_sub.Normalize();
 			float power = 0.0001f * consumeGPoint;
-			AnimManager.AddShakeAnim(GameContext.MainCamera, vec_sub, power * 3, 10 * power, 0.05f, ParamType.Position);
-
+			AnimManager.AddShakeAnim(GameContext.MainCamera, vec_sub, power * 6, 20 * power, 0.05f, ParamType.Position);
 		}
     }
 
