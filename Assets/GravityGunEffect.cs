@@ -48,7 +48,7 @@ public class GravityGunEffect : MonoBehaviour, IColoredObject
 		GravityGunEffect remainGunEffect = Instantiate(this, this.transform.position, this.transform.rotation);
 		remainGunEffect.transform.localScale = this.transform.lossyScale;
 		remainGunEffect.SetColor(GetDesiredColor(item));
-		audioSource_.Play();
+		remainGunEffect.audioSource_.Play();
 		AnimManager.AddAnim(remainGunEffect, 0.0f, ParamType.AlphaColor, AnimType.Time, 0.2f, (isLastShot_ ? RemainTime * 3 : RemainTime), endOption: AnimEndOption.Destroy);
 	}
 
