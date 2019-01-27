@@ -246,7 +246,7 @@ public class Item : MonoBehaviour
             falledFlag = true;
 
 			GameContext.SoundManager.PlayFall(this);
-			gameMgr.CountScore(this.gameObject);
+			gameMgr.OnItemFall(this);
 
 			Vector2 vec_sub = (Vector2)(transform.position - star.transform.position);
 			vec_sub.Normalize();

@@ -7,7 +7,7 @@ public class GravityGauge : MonoBehaviour
 {
 	public float BlinkRate = 25;
 
-	public float Gravity = 2500;
+	public float Gravity { get; private set; }
 	float MaxGravity;
 	float OldGravity;
 	int TextCurrentGravity;
@@ -23,9 +23,14 @@ public class GravityGauge : MonoBehaviour
 	// Start is called before the first frame update
 	void Awake()
     {
+		Gravity = GameObject.Find("GameMgr").GetComponent<GameMgr>().startGPoint;
 		MaxGravity = Gravity;
 		OldGravity = Gravity;
 		TextCurrentGravity = (int)Gravity;
+
+		Current.SetRate(1.0f);
+		Prev.SetRate(1.0f);
+		Next.SetRate(1.0f);
 
 		currentColor_ = Current.color;
 		nextColor_ = Next.color;
