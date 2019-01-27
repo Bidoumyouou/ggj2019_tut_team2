@@ -18,7 +18,9 @@ public class Item : MonoBehaviour
     public float firstspeed = 2f;
     public float force_amount = 2000;
 
-    [Tooltip("回転角/1フレーム")]public float rad = -0.2f;
+	public SoundManager.FallSEType fallSE;
+
+	[Tooltip("回転角/1フレーム")]public float rad = -0.2f;
 
     public GameMgr gameMgr;
 
@@ -201,10 +203,8 @@ public class Item : MonoBehaviour
             //fallflag on
             falledFlag = true;
 
-			GameObject SESound = GameObject.Find("GameMgr");
-            AudioSource SE = SESound.GetComponent<AudioSource>();
-            SE.Play();
-            gameMgr.CountScore(this.gameObject);
+			GameContext.SoundManager.PlayFall(this);
+			gameMgr.CountScore(this.gameObject);
 
 			Vector2 vec_sub = (Vector2)(transform.position - star.transform.position);
 			vec_sub.Normalize();

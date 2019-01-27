@@ -43,6 +43,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Planet
+    uniqueID: 2940967665
+    locked: 0
+  - name: Item
+    uniqueID: 442974399
+    locked: 0
+  - name: Player
+    uniqueID: 3172869497
+    locked: 0
   - name: Effect
     uniqueID: 523766939
     locked: 0

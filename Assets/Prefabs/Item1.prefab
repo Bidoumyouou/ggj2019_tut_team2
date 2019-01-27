@@ -85,7 +85,7 @@ PrefabInstance:
     - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
       propertyPath: itemGP
-      value: 3
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
@@ -120,6 +120,11 @@ PrefabInstance:
     - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
       propertyPath: frequency
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
+        type: 3}
+      propertyPath: fallSE
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6676153223173387189, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
