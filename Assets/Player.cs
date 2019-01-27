@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
 				// クリックで発射
 				GunEffect.Fire(touchedItem);
 				touchedItem.Fall();
+
 			}
 			else
 			{

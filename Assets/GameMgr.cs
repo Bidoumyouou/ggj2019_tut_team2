@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState{
+    title = 0,
+    maingame = 1,
+    result = 2
+}
+
+
 public class GameMgr : MonoBehaviour
 {
     public int scoreLife;
@@ -10,11 +17,17 @@ public class GameMgr : MonoBehaviour
 	
 	public GravityGauge gravityGauge;
 
+    public static GameState state = GameState.title;
 
     [Tooltip("初期生成角度最小値")] public float startDegreeMin = 50;
     [Tooltip("初期生成角度最大値")] public float startDegreeMax = 60;
     [Tooltip("初期生成角度最大値")] public float endDegree = -50;
 
+
+    public void ChangeGameMode(GameState _state)
+    {
+        state = _state;
+    }
 
     //グラビティポイント
     [HideInInspector]

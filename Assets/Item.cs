@@ -10,6 +10,7 @@ public class Item : MonoBehaviour
 
     public Vector3 initialPos = new Vector3(0,8,0);
 
+    public bool isStartItem = false;
 
     public int pointLife;
     public int pointHappiness;
@@ -54,14 +55,33 @@ public class Item : MonoBehaviour
             pivotTransform = transform.parent.transform;
         }
 
-        //座標系のinit
-        transform.position = initialPos;
-        basePosY = transform.position.y;
+        if (!isStartItem)
+        {
+            //座標系のinit
 
-        //初期回転角
-        pivotTransform.Rotate(0, 0, Random.Range(gameMgr.startDegreeMin, gameMgr.startDegreeMax));
-        //transform.rotation = new Quaternion(0, 0, Random.Range(gameMgr.startDegreeMin, gameMgr.startDegreeMax), transform.rotation.w);
-        
+            transform.position = initialPos;
+            //初期回転角
+
+            pivotTransform.Rotate(0, 0, Random.Range(gameMgr.startDegreeMin, gameMgr.startDegreeMax));
+            //transform.rotation = new Quaternion(0, 0, Random.Range(gameMgr.startDegreeMin, gameMgr.startDegreeMax), transform.rotation.w);
+
+
+            basePosY = transform.position.y;
+        }
+        else
+        {
+            //座標系のinit
+
+            transform.position = initialPos;
+            //初期回転角
+
+            pivotTransform.Rotate(0, 0, 0);
+            //transform.rotation = new Quaternion(0, 0, Random.Range(gameMgr.startDegreeMin, gameMgr.startDegreeMax), transform.rotation.w);
+
+
+            basePosY = transform.position.y;
+
+        }
     }
 
     // Update is called once per frame
@@ -77,12 +97,31 @@ public class Item : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //スイングバイ
-        RotatePivot();
-        //ゆらゆら
-        Waveing();
+        if (!isStartItem)
+        {
+            //スイングバイ
+            RotatePivot();
+            //ゆらゆら
+            Waveing();
+        }
+        else
+        {
+            StartItemBehave();
+        }
     }
 
+    void StartItemBehave()
+    {
+        //
+        if (!isFalling && !falledFlag)
+        {
+            float y = transform.localPosition.y;
+
+            y += Mathf.Cos(Time.time * frequency) * amplitude;
+
+            transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
+        }
+    }
 
     void CalcConsumeGPoint()
     {
@@ -171,14 +210,17 @@ public class Item : MonoBehaviour
         //
         //Gポイントを消費する
         gameMgr.gPoint -= consumeGPoint;
-        //デバッグ
-        Debug.Log("I consumed " + consumeGPoint + " point and remain G is " + gameMgr.gPoint);
+        //もしスタートアイテムだったらゲームを開始する
+        if (isStartItem)
+        {
+            gameMgr.ChangeGameMode(GameState.maingame);
+        }
 
 
         //Vector3 diff = (this.star.transform.position - this.transform.position).normalized;
         //this.transform.rotation = Quaternion.FromToRotation(Vector3.up, diff);
 
-        
+
 
         //初期速度の設定(差をとって正規化)
         Vector2 vec_sub = (Vector2)(transform.position - star.transform.position);
@@ -210,6 +252,7 @@ public class Item : MonoBehaviour
 			vec_sub.Normalize();
 			float power = 0.0001f * consumeGPoint;
 			AnimManager.AddShakeAnim(GameContext.MainCamera, vec_sub, power * 3, 10 * power, 0.05f, ParamType.Position);
+
 		}
     }
 
