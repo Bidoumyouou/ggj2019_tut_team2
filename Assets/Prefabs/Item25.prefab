@@ -128,6 +128,11 @@ PrefabInstance:
       propertyPath: fallSE
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6676153223173387191, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
+        type: 3}
+      propertyPath: musicTrack
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 6676153223173387190, guid: 375dd095fee6a4f43a5de1039c4c1ba4,
         type: 3}
       propertyPath: m_Offset.x

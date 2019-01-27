@@ -17,6 +17,7 @@ public class ItemGenerator : MonoBehaviour
     float time;
     public float frequency;
 
+	int orderInLayer = 0;
     public int maxItemNum;
 
     // Start is called before the first frame update
@@ -75,7 +76,9 @@ public class ItemGenerator : MonoBehaviour
 				m = Random.Range(0, itemPrefabList.Count);
 				existSame = FloatingItemList.Find((Item i) => i.name == itemPrefabList[m].name + "(Clone)") != null;
 			}
+			orderInLayer++;
 			item = GameObject.Instantiate(itemPrefabList[m]);
+			item.GetComponent<SpriteRenderer>().sortingOrder = orderInLayer;
 			FloatingItemList.Add(item.GetComponent<Item>());
             item.transform.parent = pivot.transform;
 
